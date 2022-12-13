@@ -10,33 +10,35 @@ export default class Login extends Component {
     isLoading: false,
   };
 
-  handleInfo = ({ target: { name, value } }) => {
+  handleInfo = ({ target: { value } }) => {
     const TAM_MAX = 3;
     const compara = value.length >= TAM_MAX;
     this.setState({
-      [name]: value,
+      name: value,
       disable: !compara,
+      redirect: false,
     });
   };
 
-  handleBtn = (user) => {
-    const { history } = this.props;
-    this.setState({ isLoading: true }, async () => {
-      if (user) {
-        await createUser({ name: user });
-        return history.push('/search');
-      }
+  handleBtn = async () => {
+    const { name } = this.state;
+    this.setState({ isLoading: true });
+    await createUser({ name });
+    this.setState({
+      isLoading: false,
+      redirect: true,
     });
   };
 
   render() {
-    const { name, disable, isLoading } = this.state;
+    const { disable, isLoading, redirect } = this.state;
     return (
       <div data-testid="page-login">
+        { isLoading && <Loading />}
+        { redirect && <Redirect to="/search" /> }
         <form>
           <input
             type="text"
-            name={ name }
             data-testid="login-name-input"
             onChange={ this.handleInfo }
           />
@@ -44,12 +46,11 @@ export default class Login extends Component {
             disabled={ disable }
             data-testid="login-submit-button"
             type="button"
-            onClick={ () => this.handleBtn(name) }
+            onClick={ this.handleBtn }
           >
             Entrar
           </button>
         </form>
-        { isLoading && <Loading />}
       </div>
     );
   }
