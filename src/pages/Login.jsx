@@ -10,7 +10,7 @@ export default class Login extends Component {
     isLoading: false,
   };
 
-  handleInfo = ({ target: { value } }) => {
+  validationBtn = ({ target: { value } }) => {
     const TAM_MAX = 3;
     const compara = value.length >= TAM_MAX;
     this.setState({
@@ -40,7 +40,7 @@ export default class Login extends Component {
           <input
             type="text"
             data-testid="login-name-input"
-            onChange={ this.handleInfo }
+            onChange={ this.validationBtn }
           />
           <button
             disabled={ disable }
