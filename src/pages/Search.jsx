@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
@@ -10,7 +11,8 @@ export default class Search extends Component {
     valueSearch: '',
     isLoading: false,
     result: false,
-    // artist: '',
+    failed: false,
+    artistName: '',
   };
 
   validationBtn = ({ target: { value } }) => {
@@ -26,28 +28,36 @@ export default class Search extends Component {
     const { valueSearch } = this.state;
     this.setState({
       isLoading: true,
-      result: true,
+      artistName: valueSearch,
     });
     const albuns = await searchAlbumsAPI(valueSearch);
-    // const artist = albuns.find((artista) => artista).artistName;
-    // console.log(albuns);
-    // console.log(albuns.find((artista) => artista).artistName);
+
     this.setState({
       albuns,
       valueSearch: '',
+      result: true,
       isLoading: false,
-      // artist,
     });
     if (albuns.length === 0) {
-      this.setState({ result: false });
+      this.setState({
+        result: false,
+        failed: true,
+      });
     }
   };
 
   render() {
-    const { disable, valueSearch, isLoading, result, artist, albuns } = this.state;
+    const { disable,
+      valueSearch,
+      isLoading,
+      result,
+      albuns,
+      failed,
+      artistName,
+    } = this.state;
     return (
       <div data-testid="page-search">
-        { !result && <p>Nenhum álbum foi encontrado</p> }
+        { failed && <p>Nenhum álbum foi encontrado</p> }
         { isLoading && <Loading />}
         <Header />
         <form>
@@ -69,12 +79,22 @@ export default class Search extends Component {
         {result
           ? (
             <h3>
-              {`Resultado de álbuns de: ${artist}`}
+              {`Resultado de álbuns de: ${
+                artistName
+              }`}
             </h3>
           ) : null}
-        { albuns.map((album) => (
-          <div key={ album.collectionId }>
-            <img src={ album.artworkUrl100 } alt="foto-album" />
+        { albuns.map(({ collectionId, artworkUrl100, collectionName }) => (
+          <div key={ collectionId }>
+            <img src={ artworkUrl100 } alt="foto-album" />
+            <Link
+              data-testid={ `link-to-album-${collectionId}` }
+              to={ `/album/${collectionId}` }
+            >
+              {collectionName}
+              {' '}
+
+            </Link>
           </div>
         ))}
       </div>
