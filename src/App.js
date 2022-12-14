@@ -9,19 +9,15 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
 class App extends React.Component {
-  state = {
-    // isLoading: true,
-  };
-
   render() {
-    // const { isLoading } = this.state;
-    // if (isLoading) return <Loading />;
-
     return (
       <BrowserRouter>
         <Switch>
           <Route path="/search" component={ Search } />
-          <Route path="/album" component={ Album } />
+          <Route
+            path="/album/:id"
+            render={ (props) => <Album { ...props } /> }
+          />
           <Route path="/favorites" component={ Favorite } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/profile/edit" component={ ProfileEdit } />
