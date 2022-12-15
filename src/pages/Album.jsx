@@ -2,29 +2,35 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
+import MusicCard from '../components/MusicCard';
 
 export default class Album extends Component {
   state = {
-    artistName: '',
-    albumName: '',
+    albunsInfo: {},
+    musics: '',
   };
 
-  tratamento = async (id) => {
+  async componentDidMount() {
+    const { match: { params: { id } } } = this.props;
     const musics = await getMusics(id);
-    console.log(musics.results);
-    return musics.results;
-  };
+    this.setState({
+      albunsInfo: musics[0],
+      musics: musics.filter((music, index) => index !== 0),
+    });
+  }
 
   render() {
-    const { match: { params: { id } } } = this.props;
-    const { artistName, albumName } = this.state;
+    const { albunsInfo, musics } = this.state;
+    const { artistName, collectionName } = albunsInfo;
+    console.log(albunsInfo);
 
     return (
       <div data-testid="page-album">
         <Header />
+
         <h1 data-testid="artist-name">{artistName}</h1>
-        <h2 data-testid="album-name">{albumName}</h2>
-        { this.tratamento(id)}
+        <h3 data-testid="album-name">{collectionName}</h3>
+        <MusicCard musics={ musics } />
       </div>
     );
   }

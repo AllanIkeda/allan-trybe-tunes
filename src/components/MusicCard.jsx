@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class MusicCard extends Component {
   render() {
-    const { trackName, previewUrl } = this.props;
+    const { musics } = this.props;
     return (
       <div>
         <p>{ trackName }</p>
