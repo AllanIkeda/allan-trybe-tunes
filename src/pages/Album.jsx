@@ -7,7 +7,7 @@ import MusicCard from '../components/MusicCard';
 export default class Album extends Component {
   state = {
     albunsInfo: {},
-    musics: '',
+    musics: [],
   };
 
   async componentDidMount() {
@@ -21,13 +21,14 @@ export default class Album extends Component {
 
   render() {
     const { albunsInfo, musics } = this.state;
-    const { artistName, collectionName } = albunsInfo;
-    console.log(albunsInfo);
+    const { artistName, collectionName, artworkUrl100,
+    } = albunsInfo;
+    // console.log(albunsInfo);
 
     return (
       <div data-testid="page-album">
         <Header />
-
+        <img src={ artworkUrl100 } alt="logo-do-album" />
         <h1 data-testid="artist-name">{artistName}</h1>
         <h3 data-testid="album-name">{collectionName}</h3>
         <MusicCard musics={ musics } />
