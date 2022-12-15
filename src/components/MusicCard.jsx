@@ -10,7 +10,6 @@ export default class MusicCard extends Component {
         {
           musics.map((music) => {
             const { trackName, previewUrl } = music;
-            // console.log(music);
             return (
               <div key={ trackName }>
                 <p>{ trackName }</p>
