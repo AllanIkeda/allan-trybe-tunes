@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
 
 export default class MusicCard extends Component {
@@ -25,6 +25,10 @@ export default class MusicCard extends Component {
     this.setState({ isLoading: true });
     if (checked) {
       await addSong(music);
+      this.setState({ isLoading: false });
+    }
+    if (!checked) {
+      await removeSong(music);
       this.setState({ isLoading: false });
     }
   };
