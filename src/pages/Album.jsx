@@ -31,7 +31,14 @@ export default class Album extends Component {
         <img src={ artworkUrl100 } alt="logo-do-album" />
         <h1 data-testid="artist-name">{artistName}</h1>
         <h3 data-testid="album-name">{collectionName}</h3>
-        <MusicCard musics={ musics } />
+        <ul>
+          { musics.map((music) => (
+            <MusicCard
+              key={ music.trackId }
+              music={ music }
+            />
+          ))}
+        </ul>
       </div>
     );
   }
