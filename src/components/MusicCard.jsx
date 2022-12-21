@@ -15,28 +15,31 @@ export default class MusicCard extends Component {
     });
   }
 
+  getFavorite = async () => {
+    const { music: { trackId } } = this.props;
+    const favorite = await getFavoriteSongs();
+    return favorite.map((music) => music.trackId).includes(trackId);
+  };
+
   handleChange = ({ target: { checked } }) => {
     this.handleClick(checked);
     this.setState({ checked });
   };
 
   handleClick = async (checked) => {
-    const { music } = this.props;
+    const { music, removeFavorite } = this.props;
     this.setState({ isLoading: true });
     if (checked) {
       await addSong(music);
       this.setState({ isLoading: false });
     }
     if (!checked) {
-      await removeSong(music);
+      await removeSong(music.trackId);
       this.setState({ isLoading: false });
     }
-  };
-
-  getFavorite = async () => {
-    const { music: { trackId } } = this.props;
-    const favorite = await getFavoriteSongs();
-    return favorite.map((music) => music.trackId).includes(trackId);
+    if (removeFavorite) {
+      removeFavorite(music.trackId);
+    }
   };
 
   render() {
@@ -50,12 +53,12 @@ export default class MusicCard extends Component {
         <audio data-testid="audio-component" src={ music.previewUrl } controls>
           <track kind="captions" />
         </audio>
-        <label htmlFor={ music.trackId }>
+        <label htmlFor={ music.trackName }>
           Favorita
           <input
             checked={ checked }
+            id={ music.trackName }
             type="checkbox"
-            id={ music.trackId }
             data-testid={ `checkbox-music-${music.trackId}` }
             onChange={ this.handleChange }
             // onClick={ () => this.handleClick(music) }
@@ -67,7 +70,11 @@ export default class MusicCard extends Component {
 }
 
 MusicCard.propTypes = {
-  musics: PropTypes.shape({
+  music: PropTypes.shape({
     length: PropTypes.number,
-  }),
-}.isRequired;
+    trackName: PropTypes.string,
+    previewUrl: PropTypes.string,
+    trackId: PropTypes.number,
+  }).isRequired,
+  removeFavorite: PropTypes.func.isRequired,
+};
