@@ -25,6 +25,20 @@ export default class ProfileEdit extends Component {
     });
   }
 
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value }, this.buttonValidation);
+  };
+
+  buttonValidation = () => {
+    const { name, email, image, description } = this.state;
+    const regEmail = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/;
+    if (description && regEmail.test(email) && image && name) {
+      this.setState({ buttonDisable: false });
+    } else {
+      this.setState({ buttonDisable: true });
+    }
+  };
+
   render() {
     const { name, email, image, description, isLoading, buttonDisable } = this.state;
     return (
@@ -34,33 +48,45 @@ export default class ProfileEdit extends Component {
         <form>
           <label htmlFor="name">
             Name
-            <input type="text" name="name" value={ name } data-testid="edit-input-name" />
+            <input
+              type="text"
+              name="name"
+              value={ name }
+              data-testid="edit-input-name"
+              onChange={ this.handleChange }
+            />
           </label>
-          <label htmlFor="name">
+          <label htmlFor="email">
             Email
             <input
               type="text"
               name="email"
               value={ email }
               data-testid="edit-input-email"
+              onChange={ this.handleChange }
+
             />
           </label>
-          <label htmlFor="name">
+          <label htmlFor="description">
             Description
             <input
               type="text"
               name="description"
               value={ description }
               data-testid="edit-input-description"
+              onChange={ this.handleChange }
+
             />
           </label>
-          <label htmlFor="name">
+          <label htmlFor="image">
             Image
             <input
               type="text"
               name="image"
-              Value={ image }
+              value={ image }
               data-testid="edit-input-image"
+              onChange={ this.handleChange }
+
             />
           </label>
           <button type="button" disabled={ buttonDisable } data-testid="edit-button-save">
