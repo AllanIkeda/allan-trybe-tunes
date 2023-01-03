@@ -29,14 +29,18 @@ export default class ProfileEdit extends Component {
     this.setState({ [name]: value }, this.buttonValidation);
   };
 
+  handleClick = () => {
+    const { description, email, image, name } = this.state;
+    this.setState({ isLoading: true }, async () => {
+      await updateUser({ name, email, image, description });
+    });
+  };
+
   buttonValidation = () => {
     const { name, email, image, description } = this.state;
     const regEmail = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/;
-    if (description && regEmail.test(email) && image && name) {
-      this.setState({ buttonDisable: false });
-    } else {
-      this.setState({ buttonDisable: true });
-    }
+    return description && regEmail.test(email) && image && name
+      ? this.setState({ buttonDisable: false }) : this.setState({ buttonDisable: true });
   };
 
   render() {
@@ -89,7 +93,12 @@ export default class ProfileEdit extends Component {
 
             />
           </label>
-          <button type="button" disabled={ buttonDisable } data-testid="edit-button-save">
+          <button
+            type="button"
+            disabled={ buttonDisable }
+            data-testid="edit-button-save"
+            onClick={ this.handleClick }
+          >
             Salvar Alterações
           </button>
         </form>
