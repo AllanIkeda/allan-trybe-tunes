@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { getUser, updateUser } from '../services/userAPI';
 import Loading from './Loading';
@@ -29,11 +30,12 @@ export default class ProfileEdit extends Component {
     this.setState({ [name]: value }, this.buttonValidation);
   };
 
-  handleClick = () => {
+  handleClick = async () => {
     const { description, email, image, name } = this.state;
-    this.setState({ isLoading: true }, async () => {
-      await updateUser({ name, email, image, description });
-    });
+    const { history: { push } } = this.props;
+    this.setState({ isLoading: true });
+    await updateUser({ name, email, image, description });
+    push('/profile');
   };
 
   buttonValidation = () => {
@@ -106,3 +108,9 @@ export default class ProfileEdit extends Component {
     );
   }
 }
+
+ProfileEdit.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
