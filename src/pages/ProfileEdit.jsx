@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { getUser, updateUser } from '../services/userAPI';
@@ -12,6 +13,7 @@ export default class ProfileEdit extends Component {
     description: '',
     isLoading: false,
     buttonDisable: true,
+    redirect: false,
   };
 
   async componentDidMount() {
@@ -30,12 +32,13 @@ export default class ProfileEdit extends Component {
     this.setState({ [name]: value }, this.buttonValidation);
   };
 
-  handleClick = async () => {
+  handleClick = async (e) => {
+    e.preventDefault();
     const { description, email, image, name } = this.state;
-    const { history: { push } } = this.props;
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, redirect: true });
     await updateUser({ name, email, image, description });
-    push('/profile');
+    // const { history } = this.props;
+    // history.push('/profile');
   };
 
   buttonValidation = () => {
@@ -46,9 +49,20 @@ export default class ProfileEdit extends Component {
   };
 
   render() {
-    const { name, email, image, description, isLoading, buttonDisable } = this.state;
+    const { name,
+      email,
+      image,
+      description,
+      isLoading,
+      buttonDisable,
+      redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/profile" />;
+    }
+
     return (
       <div data-testid="page-profile-edit">
+        { console.log(redirect) }
         <Header />
         { isLoading && <Loading /> }
         <form>
@@ -96,7 +110,7 @@ export default class ProfileEdit extends Component {
             />
           </label>
           <button
-            type="button"
+            type="submit"
             disabled={ buttonDisable }
             data-testid="edit-button-save"
             onClick={ this.handleClick }

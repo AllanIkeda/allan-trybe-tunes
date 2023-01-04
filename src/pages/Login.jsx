@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+
+// Styles
+import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Button from 'react-bootstrap/Button';
+import logo from '../images/logo.png';
+import '../styles/login.css';
+
 import { createUser } from '../services/userAPI';
 import Loading from './Loading';
 
@@ -33,24 +41,42 @@ export default class Login extends Component {
   render() {
     const { disable, isLoading, redirect } = this.state;
     return (
-      <div data-testid="page-login">
+      <div data-testid="page-login" className="main-container-login container w-50 p-3">
         { isLoading && <Loading />}
         { redirect && <Redirect to="/search" /> }
-        <form>
-          <input
+        <img src={ logo } alt="logo-tipo" />
+        <Form>
+          {/* <input
             type="text"
             data-testid="login-name-input"
+            placeholder="Qual é o seu Nome?"
             onChange={ this.validationBtn }
-          />
-          <button
+          /> */}
+          <FloatingLabel
+            controlId="floatingInput"
+            label="Qual é o seu Nome?"
+            className="mb-2"
+          >
+            <Form.Control
+              type="text"
+              placeholder="Qual é o seu Nome?"
+              data-testid="login-name-input"
+              onChange={ this.validationBtn }
+              className="mt-3"
+
+            />
+          </FloatingLabel>
+          <Button
+            className="w-100"
+            variant="primary"
             disabled={ disable }
             data-testid="login-submit-button"
             type="button"
             onClick={ this.handleBtn }
           >
             Entrar
-          </button>
-        </form>
+          </Button>
+        </Form>
       </div>
     );
   }
