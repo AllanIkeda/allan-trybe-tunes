@@ -17,7 +17,7 @@ export default class ProfileEdit extends Component {
   };
 
   async componentDidMount() {
-    this.setState({ isLoading: true });
+    // this.setState({ isLoading: true });
     const { name, email, image, description } = await getUser();
     this.setState({
       name,
@@ -35,7 +35,7 @@ export default class ProfileEdit extends Component {
   handleClick = async (e) => {
     e.preventDefault();
     const { description, email, image, name } = this.state;
-    this.setState({ isLoading: true, redirect: true });
+    this.setState({ redirect: true });
     await updateUser({ name, email, image, description });
     // const { history } = this.props;
     // history.push('/profile');

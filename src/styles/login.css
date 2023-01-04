@@ -12,4 +12,5 @@ body {
   flex-direction: column;
   height: 345px;
   justify-content: center;
+  margin-top: 15%;
 }

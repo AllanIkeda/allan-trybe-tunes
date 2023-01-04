@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+
+// Styles
+import '../styles/search.css';
+
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
 

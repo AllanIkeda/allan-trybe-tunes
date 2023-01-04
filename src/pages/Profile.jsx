@@ -14,7 +14,7 @@ export default class Profile extends Component {
   };
 
   async componentDidMount() {
-    this.setState({ isLoading: true });
+    // this.setState({ isLoading: true });
     const { name, email, image, description } = await getUser();
     this.setState({
       name,

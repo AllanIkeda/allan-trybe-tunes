@@ -1,0 +1,10 @@
+.img-logo {
+  height: 95.71px;
+  width: 170.81px;
+}
+
+.header-container > nav {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
