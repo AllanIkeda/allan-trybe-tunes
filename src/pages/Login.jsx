@@ -41,43 +41,45 @@ export default class Login extends Component {
   render() {
     const { disable, isLoading, redirect } = this.state;
     return (
-      <div data-testid="page-login" className="main-container-login container w-50 p-3">
-        { isLoading && <Loading />}
-        { redirect && <Redirect to="/search" /> }
-        <img src={ logo } alt="logo-tipo" />
-        <Form>
-          {/* <input
-            type="text"
-            data-testid="login-name-input"
-            placeholder="Qual é o seu Nome?"
-            onChange={ this.validationBtn }
-          /> */}
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Qual é o seu Nome?"
-            className="mb-2"
-          >
-            <Form.Control
+      <section className="login-body">
+        <div data-testid="page-login" className="main-container-login container w-50 p-3">
+          { isLoading && <Loading />}
+          { redirect && <Redirect to="/search" /> }
+          <img src={ logo } alt="logo-tipo" />
+          <Form>
+            {/* <input
               type="text"
-              placeholder="Qual é o seu Nome?"
               data-testid="login-name-input"
+              placeholder="Qual é o seu Nome?"
               onChange={ this.validationBtn }
-              className="mt-3"
+            /> */}
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Qual é o seu Nome?"
+              className="mb-2"
+            >
+              <Form.Control
+                type="text"
+                placeholder="Qual é o seu Nome?"
+                data-testid="login-name-input"
+                onChange={ this.validationBtn }
+                className="mt-3"
 
-            />
-          </FloatingLabel>
-          <Button
-            className="w-100"
-            variant="primary"
-            disabled={ disable }
-            data-testid="login-submit-button"
-            type="button"
-            onClick={ this.handleBtn }
-          >
-            Entrar
-          </Button>
-        </Form>
-      </div>
+              />
+            </FloatingLabel>
+            <Button
+              className="w-100"
+              variant="primary"
+              disabled={ disable }
+              data-testid="login-submit-button"
+              type="button"
+              onClick={ this.handleBtn }
+            >
+              Entrar
+            </Button>
+          </Form>
+        </div>
+      </section>
     );
   }
 }

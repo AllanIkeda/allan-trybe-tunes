@@ -1,3 +1,14 @@
+header {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  width: 250px;
+}
+
 .img-logo {
   height: 95.71px;
   width: 170.81px;
@@ -7,4 +18,31 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  row-gap: 16vh;
+}
+
+.link {
+  align-self: flex-start;
+  color: #444955;
+  font-family: Epilogue , Courier , monospace;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 16px;
+  text-decoration: none;
+  text-transform: capitalize;
+
+}
+
+.down-user {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+}
+
+.userIcon {
+  border-radius: 100%;
+  margin-right: 15px;
+  width: 45px;
 }

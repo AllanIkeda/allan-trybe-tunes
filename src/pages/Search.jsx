@@ -60,7 +60,7 @@ export default class Search extends Component {
       artistName,
     } = this.state;
     return (
-      <div data-testid="page-search">
+      <div data-testid="page-search" className="page-main-search">
         { failed && <p>Nenhum álbum foi encontrado</p> }
         { isLoading && <Loading />}
         <Header />

@@ -12,15 +12,14 @@ export default class Favorites extends Component {
 
   async componentDidMount() {
     this.setState({ isLoading: true });
-    this.getfavorites();
-    this.setState({
-      isLoading: false,
-    });
+    await this.getfavorites();
+    this.setState({ isLoading: false });
   }
 
   getfavorites = async () => {
     const favoriteList = await getFavoriteSongs();
-    this.setState({ musics: favoriteList });
+    this.setState({
+      musics: favoriteList });
   };
 
   removeFavorite = (id) => {
