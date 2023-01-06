@@ -1,3 +1,59 @@
 .page-main-search {
   color: black;
 }
+
+.main-search {
+  align-items: center;
+  background-image: url('../images/BG AZUL.png') , linear-gradient(90deg, rgba(0, 59, 229, 1) 0%, rgba(0, 213, 226, 1) 72%);
+  display: flex;
+  height: 30vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.input-search {
+  display: flex;
+  gap: 10px;
+  left: 120px;
+  position: relative;
+}
+
+.albuns-list {
+  align-content: stretch;
+  background-color: whitesmoke;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  justify-items: start;
+  margin: 0 0 0 -2px;
+  max-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 10px 20px 0 340px;
+  width: 100%;
+}
+
+.albuns-list::-webkit-scrollbar {
+  display: none;
+}
+
+.albuns-list > div > a {
+  color: rgb(73, 73, 73);
+  display: flex;
+  flex-direction: column;
+  object-fit: cover;
+  text-decoration: none;
+  width: 162px;
+
+}
+
+.albuns-list > div > a > img {
+  border-radius: 23px;
+  width: 162px;
+}
+
+.display-album {
+  grid-column: 1 / 4;
+  place-self: center;
+}

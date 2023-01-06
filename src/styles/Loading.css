@@ -1,13 +1,14 @@
 .loading-screen {
   align-items: center;
-  background-image: url('../images/BG AZUL.png') , linear-gradient(90deg, rgba(0, 59, 229, 1) 0%, rgba(0, 213, 226, 1) 72%);
+
+  /* background-image: url('../images/BG AZUL.png') , linear-gradient(90deg, rgba(0, 59, 229, 1) 0%, rgba(0, 213, 226, 1) 72%); */
   background-size: cover;
   display: flex;
   flex-direction: column-reverse;
   height: 100vh;
   justify-content: center;
   position: absolute;
-  width: 100vw;
-  top: 0;
   right: 0;
+  top: 0;
+  width: 100vw;
 }

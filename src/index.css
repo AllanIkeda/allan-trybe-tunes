@@ -9,9 +9,14 @@ body {
 
 #root {
   /* height: 100vh; */
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.albuns-list::-webkit-scrollbar {
+  display: none;
 }
 
 code {

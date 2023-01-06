@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
@@ -16,7 +17,7 @@ export default class Search extends Component {
     isLoading: false,
     result: false,
     failed: false,
-    artistName: '',
+    artistNameS: '',
   };
 
   validationBtn = ({ target: { value } }) => {
@@ -32,7 +33,7 @@ export default class Search extends Component {
     const { valueSearch } = this.state;
     this.setState({
       isLoading: true,
-      artistName: valueSearch,
+      artistNameS: valueSearch,
     });
     const albuns = await searchAlbumsAPI(valueSearch);
 
@@ -57,50 +58,69 @@ export default class Search extends Component {
       result,
       albuns,
       failed,
-      artistName,
+      artistNameS,
     } = this.state;
     return (
       <div data-testid="page-search" className="page-main-search">
-        { failed && <p>Nenhum álbum foi encontrado</p> }
         { isLoading && <Loading />}
         <Header />
-        <form>
-          <input
-            value={ valueSearch }
-            type="text"
-            data-testid="search-artist-input"
-            onChange={ this.validationBtn }
-          />
-          <button
-            type="button"
-            data-testid="search-artist-button"
-            disabled={ disable }
-            onClick={ this.handleClick }
-          >
-            Pesquisar
-          </button>
-        </form>
-        {result
-          ? (
-            <h3>
-              {`Resultado de álbuns de: ${
-                artistName
-              }`}
-            </h3>
-          ) : null}
-        { albuns.map(({ collectionId, artworkUrl100, collectionName }) => (
-          <div key={ collectionId }>
-            <img src={ artworkUrl100 } alt="foto-album" />
-            <Link
-              data-testid={ `link-to-album-${collectionId}` }
-              to={ `/album/${collectionId}` }
+        <form className="main-search">
+          <div className="input-search">
+            <input
+              value={ valueSearch }
+              type="text"
+              data-testid="search-artist-input"
+              onChange={ this.validationBtn }
+            />
+            <Button
+              className="btn-search"
+              variant="outline-info"
+              data-testid="search-artist-button"
+              disabled={ disable }
+              onClick={ this.handleClick }
             >
-              {collectionName}
-              {' '}
-
-            </Link>
+              Pesquisar
+            </Button>
+            {/* <button
+              type="button"
+              data-testid="search-artist-button"
+              disabled={ disable }
+              onClick={ this.handleClick }
+            >
+              Pesquisar
+            </button> */}
           </div>
-        ))}
+        </form>
+        <div />
+        { failed && <p>Nenhum álbum foi encontrado</p> }
+        <section className="albuns-list">
+
+          {result
+            ? (
+              <h3 className="display-album">
+                {`Resultado de álbuns de: ${
+                  artistNameS
+                }`}
+              </h3>
+            ) : null}
+          { albuns.map(({ artistName, collectionId, artworkUrl100, collectionName }) => (
+            <div key={ collectionId }>
+              <Link
+                data-testid={ `link-to-album-${collectionId}` }
+                to={ `/album/${collectionId}` }
+              >
+                <img src={ artworkUrl100 } alt="foto-album" />
+                <h5>
+                  {collectionName}
+                </h5>
+                {' '}
+                <h6>
+                  {artistName}
+                </h6>
+              </Link>
+            </div>
+          ))}
+        </section>
       </div>
     );
   }
