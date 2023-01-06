@@ -49,6 +49,11 @@ export default class Search extends Component {
         result: false,
         failed: true,
       });
+    } else {
+      this.setState({
+        result: true,
+        failed: false,
+      });
     }
   };
 
