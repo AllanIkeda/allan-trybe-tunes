@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { XCircle } from 'react-bootstrap-icons';
 import Header from '../components/Header';
 
 // Styles
@@ -92,7 +93,13 @@ export default class Search extends Component {
           </div>
         </form>
         <div />
-        { failed && <p>Nenhum álbum foi encontrado</p> }
+        { failed
+        && (
+          <div className="error-album">
+            <XCircle />
+            <p>Nenhum álbum foi encontrado</p>
+          </div>
+        )}
         <section className="albuns-list">
 
           {result

@@ -57,3 +57,18 @@
   grid-column: 1 / 4;
   place-self: center;
 }
+
+.error-album {
+  align-items: center;
+  color: #c0c3c9;
+  display: flex;
+  flex-direction: column;
+  font-family: Epilogue , Courier , monospace;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  gap: 19px;
+  line-height: 31px;
+  margin: 131px 0 0 230px;
+  text-align: center;
+}
