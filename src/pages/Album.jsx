@@ -4,6 +4,9 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 
+// style
+import '../styles/Album.css';
+
 export default class Album extends Component {
   state = {
     albunsInfo: {},
@@ -28,17 +31,25 @@ export default class Album extends Component {
     return (
       <div data-testid="page-album">
         <Header />
-        <img src={ artworkUrl100 } alt="logo-do-album" />
-        <h1 data-testid="artist-name">{artistName}</h1>
-        <h3 data-testid="album-name">{collectionName}</h3>
-        <ul>
-          { musics.map((music) => (
-            <MusicCard
-              key={ music.trackId }
-              music={ music }
-            />
-          ))}
-        </ul>
+        <section className="head-cover">
+          <div>
+            <img className="album-cover" src={ artworkUrl100 } alt="logo-do-album" />
+            <div>
+              <h1 data-testid="artist-name">{artistName}</h1>
+              <h3 data-testid="album-name">{collectionName}</h3>
+            </div>
+          </div>
+        </section>
+        <section className="music-list">
+          <ul>
+            { musics.map((music) => (
+              <MusicCard
+                key={ music.trackId }
+                music={ music }
+              />
+            ))}
+          </ul>
+        </section>
       </div>
     );
   }

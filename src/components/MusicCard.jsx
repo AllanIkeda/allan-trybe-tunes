@@ -23,6 +23,7 @@ export default class MusicCard extends Component {
 
   handleChange = ({ target: { checked } }) => {
     this.handleClick(checked);
+    console.log(checked);
     this.setState({ checked });
   };
 
@@ -39,6 +40,7 @@ export default class MusicCard extends Component {
     }
     if (removeFavorite) {
       removeFavorite(music.trackId);
+      // await removeSong(music.trackId);
     }
   };
 
@@ -46,26 +48,26 @@ export default class MusicCard extends Component {
     const { isLoading, checked } = this.state;
     const { music } = this.props;
 
-    return (
-      <li data-testid="card-musics">
-        { isLoading && <Loading /> }
-        <p>{ music.trackName }</p>
-        <audio data-testid="audio-component" src={ music.previewUrl } controls>
-          <track kind="captions" />
-        </audio>
-        <label htmlFor={ music.trackName }>
-          Favorita
-          <input
-            checked={ checked }
-            id={ music.trackName }
-            type="checkbox"
-            data-testid={ `checkbox-music-${music.trackId}` }
-            onChange={ this.handleChange }
-            // onClick={ () => this.handleClick(music) }
-          />
-        </label>
-      </li>
-    );
+    return isLoading
+      ? <Loading />
+      : (
+        <li data-testid="card-musics">
+          <p>{music.trackName}</p>
+          <audio data-testid="audio-component" src={ music.previewUrl } controls>
+            <track kind="captions" />
+          </audio>
+          <label htmlFor={ music.trackName }>
+            <input
+              checked={ checked }
+              id={ music.trackName }
+              className="favoritar"
+              type="checkbox"
+              data-testid={ `checkbox-music-${music.trackId}` }
+              onChange={ this.handleChange }
+            />
+          </label>
+        </li>
+      );
   }
 }
 

@@ -23,6 +23,7 @@ export default class Favorites extends Component {
   };
 
   removeFavorite = (id) => {
+    console.log(id);
     const { musics } = this.state;
 
     const Array = musics.filter((music) => music.trackId !== id);

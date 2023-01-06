@@ -1,0 +1,65 @@
+.head-cover {
+  align-items: center;
+  background-image: url('../images/BG AZUL.png') , linear-gradient(90deg, rgba(0, 59, 229, 1) 0%, rgba(0, 213, 226, 1) 72%);
+  display: flex;
+  height: 30vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.head-cover > div {
+  display: flex;
+  position: relative;
+  right: 133px;
+  top: 90px;
+}
+
+.head-cover > div > img {
+  border-radius: 12px;
+  filter: drop-shadow(-9px 8px 8px rgba(68, 73, 85, 0.2));
+  mix-blend-mode: normal;
+  width: 168px;
+}
+
+.music-list {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  max-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-left: 515px;
+  padding-right: 149px;
+  padding-top: 51px;
+}
+
+.music-list::-webkit-scrollbar {
+  display: none;
+}
+
+.music-list > ul {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  list-style-type: none;
+
+  /* padding-top: 550px; */
+  width: 600px;
+}
+
+.music-list > ul > li > audio {
+  width: 80%;
+}
+
+.music-list > ul > li {
+  border-bottom: 0.848px solid #ccd4e1;
+  padding-bottom: 21px;
+  position: relative;
+}
+
+.music-list > ul > li > label {
+  display: inline-block;
+  left: 471px;
+  position: absolute;
+  top: 56px;
+}
