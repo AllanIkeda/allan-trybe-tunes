@@ -37,8 +37,8 @@ export default class ProfileEdit extends Component {
     const { description, email, image, name } = this.state;
     this.setState({ redirect: true });
     await updateUser({ name, email, image, description });
-    // const { history } = this.props;
-    // history.push('/profile');
+    const { history } = this.props;
+    history.push('/profile');
   };
 
   buttonValidation = () => {
@@ -62,7 +62,6 @@ export default class ProfileEdit extends Component {
 
     return (
       <div data-testid="page-profile-edit">
-        { console.log(redirect) }
         <Header />
         { isLoading && <Loading /> }
         <form>
@@ -115,7 +114,7 @@ export default class ProfileEdit extends Component {
             data-testid="edit-button-save"
             onClick={ this.handleClick }
           >
-            Salvar Alterações
+            Editar perfil
           </button>
         </form>
       </div>
