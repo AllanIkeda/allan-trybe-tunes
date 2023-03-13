@@ -37,8 +37,8 @@ export default class ProfileEdit extends Component {
     const { description, email, image, name } = this.state;
     this.setState({ redirect: true });
     await updateUser({ name, email, image, description });
-    const { history } = this.props;
-    history.push('/profile');
+    // const { history } = this.props;
+    // history.push('/profile');
   };
 
   buttonValidation = () => {
